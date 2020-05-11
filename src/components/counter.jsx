@@ -9,17 +9,13 @@ import React, {Component} from "react";
 class Counter extends Component {
   //add the stat property - stat is a special property in react that holds any data this component needs
   // state property set to = data object
-  state = {
-    /value: this.props.counter.value,
-  };
-
-  handleIncrement = productID => {
-    this.setState({value: this.state.value + 1});
-    // console.log(productID);
-  };
+  //Delete state property when we decided to make this a Controlled component
+  // state = {
+  //   value: this.props.counter.value,
+  // };
 
   render() {
-    console.log("props", this.props.counter);
+    // console.log("props", this.props.counter);
     //add css classes dynamically - depending on count value
     //Had synamic classes here bloating the render() so refactored below.
     // try to keep render clean and not bloated with respoinsibilities
@@ -27,11 +23,13 @@ class Counter extends Component {
     return (
       //'this' refs current object
       //use js array method MAP to loop through tags array and map it to an LI
-      <div>  
+      <div>
         <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
         {/* Reference the function - don't actually call it with"()" like in html   */}
         <button
-          onClick={() => this.handleIncrement({id: this.props.counter.id})}
+          // onClick={() => this.handleIncrement({id: this.props.counter.id})}
+          //Change the onClick to raise event handler of counter object
+          onClick={() => this.props.onIncrement(this.props.counter)}
           className="btn btn-secondary btn-sm"
         >
           Increment
@@ -55,12 +53,13 @@ class Counter extends Component {
 
   getBadgeClasses() {
     let cssClasses = "badge m-2 ";
-    cssClasses += this.state.value === 0 ? "badge-warning" : "badge-primary";
+    cssClasses +=
+      this.props.counter.value === 0 ? "badge-warning" : "badge-primary";
     return cssClasses;
   }
 
   formatCount() {
-    const {value: count} = this.state;
+    const {value: count} = this.props.counter;
     return count === 0 ? "Zero" : count;
   }
 }
