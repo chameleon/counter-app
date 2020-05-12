@@ -24,6 +24,13 @@ class App extends Component {
     this.setState({counters});
   };
 
+  handleDecrement = counter => {
+    const counters = [...this.state.counters];
+    const index = counters.indexOf(counter);
+    counters[index].value--;
+    this.setState({counters});
+    // console.log(counters);
+  };
   //A whole object [counter] is passed into this.
   handleIncrement = counter => {
     // Test the plumbing
@@ -74,7 +81,11 @@ class App extends Component {
             counters={this.state.counters}
             onReset={this.handleReset}
             onIncrement={this.handleIncrement}
+            onDecrement={this.handleDecrement}
             onDelete={this.handleDelete}
+            //If
+            // enabled={this.state.counters.filter(c => c.value > 0)}
+            enabled="false"
           />
         </main>
       </>
