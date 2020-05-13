@@ -15,10 +15,25 @@ class App extends Component {
     ],
   };
 
+  //Mounting phase lifecycle hook: constructor
+  constructor(props) {
+    //Constructor is the right place to initialize the properties in this class - like State
+    super();
+    console.log("App - Mounting phase lifecycle hook 'constructor'");
+    // this.state = this.props.something;
+
+    //If you want access to props you have to pass it into this function and super(props)
+  }
+  componentDidMount() {
+    console.log("App - Mounting phase lifecycle hook 'componentDidMount'");
+    //Mounting Phase Life Cycle Hook: componentDidMount
+    //Perfect place to make Ajax calls to grab data
+    //this.setState() ...newData
+  }
+
   //   We should always let the CounterS component edit it's own state.
   //  so we 'raised' the event handler from counter.jsx
   handleDelete = counterId => {
-    console.log("deletedd", counterId);
     // this.setState =  a whole new version of the counters array with item deleted
     const counters = this.state.counters.filter(c => c.id !== counterId);
     this.setState({counters});
@@ -53,7 +68,7 @@ class App extends Component {
 
     //Set state array equal to our cloned and modified array of the same name [counters]
     this.setState({counters});
-    console.log(counters);
+    console.log("counters: ", counters);
   };
 
   //If this sets State here in this component, then the state of the individual counter components
@@ -71,6 +86,8 @@ class App extends Component {
   };
 
   render() {
+    console.log("App - rendered - lifecycle hook render");
+
     return (
       <>
         <NavBar
@@ -83,9 +100,6 @@ class App extends Component {
             onIncrement={this.handleIncrement}
             onDecrement={this.handleDecrement}
             onDelete={this.handleDelete}
-            //If
-            // enabled={this.state.counters.filter(c => c.value > 0)}
-            enabled="false"
           />
         </main>
       </>

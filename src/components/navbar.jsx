@@ -1,13 +1,13 @@
-import React, {Component} from "react";
+import React from "react";
 
-// export default ;
 //Stateless, Functional, Component
 const NavBar = props => {
+  //Can't use lifecycles hooks on Stateless Functional Components
   return (
     //   console.log({this.props});
     // <!-- As a link -->
     <nav className="navbar navbar-light bg-light">
-      <a className="navbar-brand" href="#">
+      <a className="navbar-brand" href="/#">
         <span className="badge badge-pill badge-secondary">
           {props.totalCounters}
         </span>
